@@ -1,6 +1,5 @@
-from flask import Flask, request, jsonify
-
-app = Flask(__name__)
+from core import app
+from flask import request, jsonify
 
 usd = 11380.7 # 1 USD = 11380.7 UZS
 
@@ -58,6 +57,3 @@ def to_uzs():
                     "converted": int(data)*usd,
                     "convertedCurrency": "UZS"})
     
-
-if __name__ == '__main__':
-    app.run(debug= True)    

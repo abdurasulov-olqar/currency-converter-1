@@ -56,3 +56,15 @@ parameters:
   "convertedCurrency": "UZS"
 }
 ```
+
+
+## project file structure
+
+```
+.
+├── core/
+│   ├── __init__.py
+│   ├── views.py
+├── manage.py
+
+```
