@@ -1,10 +1,10 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
 usd = 11380.7 # 1 USD = 11380.7 UZS
 
-@app.route('/api/to-usd', methods=['GET'])
+@app.route('/api/to-usd', methods=['GET','POST'])
 def to_usd():
     """
     Convert to USD
@@ -24,7 +24,12 @@ def to_usd():
                 "convertedCurrency": "USD"
             }
     """
-    pass
+    data=request.args.get("amount",0)
+    
+    return jsonify({"amount": data,
+                    "currency": "UZS",
+                    "converted": int(data)/usd,
+                    "convertedCurrency": "USD"})
 
 @app.route('/api/to-uzs', methods=['GET'])
 def to_uzs():
@@ -46,8 +51,13 @@ def to_uzs():
                 "convertedCurrency": "UZS"
             }
     """
-    pass
+    data = request.args["amount"]
+    
+    return jsonify({"amount": data,
+                    "currency": "USD",
+                    "converted": int(data)*usd,
+                    "convertedCurrency": "UZS"})
     
 
 if __name__ == '__main__':
-    app.run()    
+    app.run(debug= True)    
